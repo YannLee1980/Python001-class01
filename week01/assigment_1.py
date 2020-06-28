@@ -8,6 +8,7 @@ import lxml.etree
 import time
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
+
 header = {'user-agent': USER_AGENT}
 
 url = 'https://maoyan.com/films?showType=3'
@@ -17,7 +18,6 @@ url = 'https://maoyan.com/films?showType=3'
 
 # 在电影详细页爬取电影名等信息
 def get_film_info(url):
-    print('99999')
     time.sleep(2)
     header = {'user-agent': USER_AGENT}
 
@@ -30,19 +30,18 @@ def get_film_info(url):
     selector = lxml.etree.HTML(resp.text)
 
     # 电影名称
-    #film_name = selector.xpath('/html/body/div[4]/div/div[2]/div[1]/h1/text()')
     film_name = soup.find('div', attrs={'class': 'movie-brief-container'}).find('h1', attrs={'class': 'name'}).text
     print(film_name)
 
-    # 电影类型/html/body/div[4]/div/div[2]/div[1]/ul/li[1]/a[1]
-    type_str_1 = selector.xpath('//div[@class="movie-brief-container"]/ul/li[1]/a[1]/text()')
-    type_str_2 = selector.xpath('//div[@class="movie-brief-container"]/ul/li[1]/a[2]/text()')
-    type_str_3 = selector.xpath('//div[@class="movie-brief-container"]/ul/li[1]/a[3]/text()')
-    film_type = str(type_str_1) + ' ' + str(type_str_2) + ' ' + str(type_str_3)
+    # 电影类型
+    type_str = selector.xpath('//div[@class="movie-brief-container"]/ul/li[1]/a/text()')
+    film_type = ''
+    for str in type_str:
+        film_type = film_type + ' ' + str
     print(film_type)
 
     # 上映时间
-    plan_time = selector.xpath('//div[@class="movie-brief-container"]/ul/li[3]/text()')
+    plan_time = selector.xpath('//div[@class="movie-brief-container"]/ul/li[3]/text()')[0].strip()
     print(plan_time)
 
     return [film_name, film_type, plan_time]
@@ -57,12 +56,10 @@ print('链接https://maoyan.com/films?showType=3的状态码', resp.status_code)
 bs_info = BeautifulSoup(resp.text, 'html.parser')
 
 tags = bs_info.find_all('div', attrs={'class': 'movie-item film-channel'})
-print(tags)
 
 movies = pd.DataFrame(columns=['Film_Name', 'Film_Type', 'Plan_Time'])
 counter = 0
 for a_tag in tags:
-    print('test')
     link = 'https://maoyan.com' + a_tag.find('a').get('href')
     print(link)
     info_list = get_film_info(link)
@@ -74,5 +71,3 @@ for a_tag in tags:
         break
 
 movies.to_csv('./Movies_Info.csv', encoding='utf8')
-                            
-
