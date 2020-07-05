@@ -116,6 +116,13 @@ https://github.com/tesseract-ocr/tessdata
 >切换分支：git checkout 3a
 
 #### 8. 自定义中间件&随机代理IP
+* 以随机代理的例子：自定义中间件，主要是继承类HttpProxyMiddleware：
+        from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
+  并实现 __init__()、from_crawler()、_set_proxy()方法
+  settings文件需进行相应的配置：
+          DOWNLOADER_MIDDLEWARES = {
+            'rand_proxy_spider.middlewares.RandProxySpiderDownloaderMiddleware': 543, 'rand_proxy_spider.middlewares.RandomHttpProxyMiddleware': 400
+        }
 * 课程参考资源：
 >切换分支：git checkout 3a
 
