@@ -249,38 +249,38 @@ https://pandas.pydata.org/docs/user_guide/computation.html#method-summary
 #### 8. pandas 多表拼接
 * 注意：merge中的参数理解：on,how,left_on,right_on
   
-      import pandas as pd
-      import numpy as np
-      group = ['x','y','z']
-      data1 = pd.DataFrame({
-      "group":[group[x] for x in np.random.randint(0,len(group),10)] ,
-      "age":np.random.randint(15,50,10)
-      })
-      data2 = pd.DataFrame({
-      "group":[group[x] for x in np.random.randint(0,len(group),10)] ,
-      "salary":np.random.randint(5,50,10),
-      })
-      data3 = pd.DataFrame({
-      "group":[group[x] for x in np.random.randint(0,len(group),10)] ,
-      "age":np.random.randint(15,50,10),
-      "salary":np.random.randint(5,50,10),
-      })
-      # 一对一
-      pd.merge(data1, data2)
-      # 多对一
-      pd.merge(data3, data2, on='group')
-      # 多对多
-      pd.merge(data3, data2)
-      # 连接键类型，解决没有公共列问题
-      pd.merge(data3, data2, left_on= 'age', right_on='salary')
-      # 连接方式
-      # 内连接，不指明连接方式，默认都是内连接
-      pd.merge(data3, data2, on= 'group', how='inner')
-      # 左连接 left
-      # 右连接 right
-      # 外连接 outer
-      # 纵向拼接
-      pd.concat([data1, data2])
+            import pandas as pd
+            import numpy as np
+            group = ['x','y','z']
+            data1 = pd.DataFrame({
+            "group":[group[x] for x in np.random.randint(0,len(group),10)] ,
+            "age":np.random.randint(15,50,10)
+            })
+            data2 = pd.DataFrame({
+            "group":[group[x] for x in np.random.randint(0,len(group),10)] ,
+            "salary":np.random.randint(5,50,10),
+            })
+            data3 = pd.DataFrame({
+            "group":[group[x] for x in np.random.randint(0,len(group),10)] ,
+            "age":np.random.randint(15,50,10),
+            "salary":np.random.randint(5,50,10),
+            })
+            # 一对一
+            pd.merge(data1, data2)
+            # 多对一
+            pd.merge(data3, data2, on='group')
+            # 多对多
+            pd.merge(data3, data2)
+            # 连接键类型，解决没有公共列问题
+            pd.merge(data3, data2, left_on= 'age', right_on='salary')
+            # 连接方式
+            # 内连接，不指明连接方式，默认都是内连接
+            pd.merge(data3, data2, on= 'group', how='inner')
+            # 左连接 left
+            # 右连接 right
+            # 外连接 outer
+            # 纵向拼接
+            pd.concat([data1, data2])
 * 课程参考资料：
 >1. 获取课程源码操作方法：
 切换分支：git checkout 4b
@@ -382,20 +382,14 @@ https://github.com/fxsjy/jieba/blob/master/README.md
 >2. snowNLP 参考学习地址：
 https://github.com/isnowfy/snownlp/blob/master/README.md
 
-#### 作业：
-* `SELECT id,COUNT(DISTINCT order_id) FROM table1 GROUP BY id;`:
-  `table1.groupby('id')['order_id'].nunique()` #nunique()唯一值的个数。
-  
-
 ### 疑问：
 1. map的使用比较模糊！
 2. agg能用哪些函数？
 3. pivot_table需要进一步了解。
 4. SnowNLP的训练模型如何准备数据格式。
-5. merge中的inner和outer需要加深理解。
 
 ### **学习心得：**
-&emsp;&emsp; 本周的作业不算多，但真正需要掌握的知识不少，pandas中的操作需要本质上理解才不会混乱。数据处理应该对于机器学习的效果影响比较大，怎样处理好原始数据以用于机器学习，一定是工作中很重要的一环。课程中介绍到的SnowNLP和jieba两个中文语言处理工具很实用，可能如果要用到实际中，还需要利用实际应用场景的数据进一步训练才能真正发挥很好的实用价值。
+
 
 <p align="right">学员：李志源</p>
-<p align="right">2020年7月17日</p>
+<p align="right">2020年7月12日</p>
