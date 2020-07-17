@@ -392,7 +392,14 @@ https://github.com/isnowfy/snownlp/blob/master/README.md
 2. agg能用哪些函数？
 3. pivot_table需要进一步了解。
 4. SnowNLP的训练模型如何准备数据格式。
-5. merge中的inner和outer需要加深理解。
+5. merge中的inner和outer需要加深理解：
+   * inner：两数据表on字段的交集的数据进行合并；
+   * outer：两数据表on字段的并集的数据进行合并。
+   * 相当于SQL语句：INNER JOIN
+6. SQL中的union VS. union all:
+   * UNION: 堆叠两数据表，并去重；
+   * UNION ALL: 堆叠两数据表，不去重。
+   * 相当于pandas的concat、append。
 
 ### **学习心得：**
 &emsp;&emsp; 本周的作业不算多，但真正需要掌握的知识不少，pandas中的操作需要本质上理解才不会混乱。数据处理应该对于机器学习的效果影响比较大，怎样处理好原始数据以用于机器学习，一定是工作中很重要的一环。课程中介绍到的SnowNLP和jieba两个中文语言处理工具很实用，可能如果要用到实际中，还需要利用实际应用场景的数据进一步训练才能真正发挥很好的实用价值。
